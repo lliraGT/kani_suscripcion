@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="calculate_next_delivery_date" string="Calcular próxima fecha de suscripción" type="object" class="btn-info"/>
+                    <button name="button_calculate_next_delivery_date" string="Calcular próxima fecha de suscripción" type="object" class="btn-info"/>
                 </xpath>
             </field>
         </record>
