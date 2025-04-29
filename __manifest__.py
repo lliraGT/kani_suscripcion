@@ -11,6 +11,7 @@
     'website': 'https://www.yourcompany.com',
     'depends': ['crm', 'sale'],
     'data': [
+        'data/ir_cron_data.xml',
         'views/delivery_schedule_views.xml',
     ],
     'installable': True,

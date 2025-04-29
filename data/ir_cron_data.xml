@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Server Action for Updating Delivery Dates -->
+        <record id="action_update_delivery_dates" model="ir.actions.server">
+            <field name="name">Update Next Delivery Dates</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">
+# Get all leads that have the required fields set
+leads = env['crm.lead'].search([
+    ('x_studio_plan_recurrente', '!=', False),
+    ('x_studio_da_de_despacho', '!=', False)
+])
+if leads:
+    leads.calculate_next_delivery_date()
+            </field>
+        </record>
+
+        <!-- Cron Job Definition -->
+        <record id="ir_cron_update_delivery_dates" model="ir.cron">
+            <field name="name">Suscripción - Actualizar fecha de próximo pedido</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">model.search([
+    ('x_studio_plan_recurrente', '!=', False),
+    ('x_studio_da_de_despacho', '!=', False)
+]).calculate_next_delivery_date()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>
